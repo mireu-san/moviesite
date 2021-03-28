@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import React from "react";
 import TVPresenter from "./TVPresenter";
-import { tvApi } from "api";
+import { moviesApi, tvApi } from "api";
 
 export default class extends React.Component{
   state = {
@@ -11,6 +11,8 @@ export default class extends React.Component{
     loading: true,
     error: null
   };
+
+
 
   async componentDidMount() {
     try {
