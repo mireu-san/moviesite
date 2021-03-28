@@ -10,7 +10,17 @@ export default class extends React.Component{
     loading: true
   };
 
-  
+  componentDidMount(){
+    try{
+
+    } catch {
+
+    } finally {
+      
+    }
+  }
+
+
   render() { 
     const { nowPlaying, upcoming, popular, error, loading } = this.state;
     return (
