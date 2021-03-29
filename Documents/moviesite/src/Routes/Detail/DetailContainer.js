@@ -1,10 +1,9 @@
-import { render } from "@testing-library/react";
-import { moviesApi, tvApi } from "api";
 import React from "react";
 import DetailPresenter from "./DetailPresenter"
+import { moviesApi, tvApi } from "../../api";
 
 export default class extends React.Component{
-  constructor(props){
+  constructor(props) {
     super(props);
     const {
       location: { pathname }
@@ -16,31 +15,28 @@ export default class extends React.Component{
       isMovie: pathname.includes("/movie/")
   };
 }
+
   async componentDidMount() {
     const {
       match: {
         params: { id }
       },
-      history: { push },
-      location: { pathname },
+      history: { push }
     } = this.props;
     const { isMovie } = this.state;
-    this.isMovie = pathname.includes("/movie/");
     const parsedId = parseInt(id);
     if (isNaN(parsedId)) {
       return push("/");
     }
     let result = null;
-      try{
-        if(isMovie){
-          const request = await moviesApi.movieDetail(parseId);
-          result = request.data;
-        } else {
-          const request = await tvApi.showDetail(parsedId);
-          result = request.data;
-        }
+    try {
+      if (isMovie) {
+        ({ data: result } = await moviesApi.movieDetail(parsedId));         
+      } else {
+        ({ data: result } = await tvApi.showDetail(parsedId));
+      }
       } catch {
-        this.setState({error: "Can't find anything."});
+        this.setState({ error: "Can't find anything." });
       } finally {
         this.setState({ loading: false, result });
     }
@@ -48,12 +44,6 @@ export default class extends React.Component{
   
   render() {
     const { result, error, loading } = this.state;
-    return (
-      <DetailPresenter
-        result={result}
-        error={error}
-        loading={loading}
-      />
-    );
+    return <DetailPresenter result={result} error={error} loading={loading} />;
   }
 }
