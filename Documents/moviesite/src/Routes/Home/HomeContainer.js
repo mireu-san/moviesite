@@ -2,7 +2,7 @@ import React from "react";
 import HomePresenter from "./HomePresenter";
 import { moviesApi } from "api";
 
-export default class extends React.Component{
+export default class extends React.Component {
   state = {
     nowPlaying: null,
     upcoming: null,
@@ -14,13 +14,13 @@ export default class extends React.Component{
   async componentDidMount(){
     try{
       const {
-        data: {results: nowPlaying}
+        data: { results: nowPlaying }
     } = await moviesApi.nowPlaying();
       const {
-        data: {results: upcoming} 
+        data: { results: upcoming } 
       } = await moviesApi.upcoming();
       const {
-        data: {results: popular}
+        data: { results: popular }
       } = await moviesApi.popular();
       this.setState({
         nowPlaying,
