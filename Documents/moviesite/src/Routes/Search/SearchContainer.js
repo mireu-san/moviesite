@@ -2,7 +2,7 @@ import React from "react";
 import SearchPresenter from "./SearchPresenter";
 import { moviesApi, tvApi } from "../../api";
 
-export default class extends React.Component{
+export default class extends React.Component {
   state = {
     movieResults: null,
     tvResults: null,
@@ -13,36 +13,36 @@ export default class extends React.Component{
 
   handleSubmit = () => {
     const { searchTerm } = this.state;
-    if(searchTerm !== ""){
+    if (searchTerm !== "") {
       this.searchByTerm();
     }
   };
 
-  searchByTerm = async() => {
+  searchByTerm = async () => {
     const { searchTerm } = this.state;
-    this.setState({loading: true});
-    try{
+    this.setState({ loading: true });
+    try {
       const {
-        data: {results: movieResults}
+        data: { results: movieResults }
       } = await moviesApi.search(searchTerm);
       const {
-        data: {results: tvResults}
+        data: { results: tvResults }
       } = await tvApi.search(searchTerm);
-        this.setState({
-          movieResults,
-          tvResults
-        });
+      this.setState({
+        movieResults,
+        tvResults
+      });
     } catch {
-        this.setState({error: "Can't find the search results."})
+      this.setState({ error: "Can't find results." });
     } finally {
-        this.setState({ loading : false });
+      this.setState({ loading: false });
     }
   };
 
   render() {
     const { movieResults, tvResults, searchTerm, loading, error } = this.state;
-    return ( 
-      <SearchPresenter 
+    return (
+      <SearchPresenter
         movieResults={movieResults}
         tvResults={tvResults}
         searchTerm={searchTerm}
