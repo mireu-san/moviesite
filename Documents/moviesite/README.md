@@ -20,3 +20,6 @@ Learning React and ES6 by building a Movie Discovery App.
 
 # note for a reader:
 parms = parameter
+
+# note
+The console error was occurred due to header.js
