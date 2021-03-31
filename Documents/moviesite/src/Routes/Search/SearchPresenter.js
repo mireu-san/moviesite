@@ -1,6 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Section from "../../Components/Section";
+
+const Container = styled.div``;
+
+const Form = styled.form``;
+
+const Input = styled.input``;
+
 
 const SearchPresenter = ({
   movieResults, 
@@ -9,7 +17,13 @@ const SearchPresenter = ({
   searchTerm, 
   handleSubmit, 
   error
-}) => null;
+}) => (
+  <Container>
+    <Form onSubmit={handleSubmit}>
+      <Input placeholder="Search Movies or TV Shows here!" value={searchTerm}></Input>
+    </Form>
+  </Container>
+);
 
 SearchPresenter.propTypes = {
   movieResults:PropTypes.array,
