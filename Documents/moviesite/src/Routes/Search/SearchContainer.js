@@ -11,7 +11,17 @@ export default class extends React.Component {
     error: null
   };
 
-  handleSubmit = () => {
+updateTerm = (event) => {
+  const { 
+    target: { value } 
+  } = event;
+  this.setState({
+    searchTerm: value
+  });
+};
+
+  handleSubmit = event => {
+    event.preventDefault();
     const { searchTerm } = this.state;
     if (searchTerm !== "") {
       this.searchByTerm();
@@ -49,6 +59,7 @@ export default class extends React.Component {
         error={error}
         searchTerm={searchTerm}
         handleSubmit={this.handleSubmit}
+        updateTerm={this.updateTerm}
       />
     );
   }
