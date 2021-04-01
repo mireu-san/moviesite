@@ -8,8 +8,7 @@ const Container = styled.div`
 `;
 
 const Image = styled.div`
-  background-image: url(${props => 
-    `https://image.tmdb.org/t/p/w300${props.bgUrl}`});
+  background-image: url(${props => props.bgUrl});
   height: 180px;
   background-size: cover;
   border-radius: 4px;
@@ -53,7 +52,9 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
   <Link to={isMovie? `/movie/${id}` : `/show/${id}`}>
     <Container>
       <ImageContainer>
-        <Image bgUrl={imageUrl ? imageUrl : require("../assets/noPoster.jpg")} />
+        <Image bgUrl={imageUrl 
+          ? `https://image.tmdb.org/t/p/w300${imageUrl}` 
+          : require("../assets/noPoster.jpg")} />
         <Rating>
           <span role="img" aria-label="rating">
             ★
