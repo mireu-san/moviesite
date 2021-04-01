@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Section from "../../Components/Section";
 import Loader from "../../Components/Loader";
+import Section from "../../Components/Section";
 import Message from "../../Components/Message";
 import Poster from "../../Components/Poster";
 
@@ -34,9 +34,9 @@ const SearchPresenter = ({
   <Container>
     <Form onSubmit={handleSubmit}>
       <Input 
-      placeholder="Search Movies or TV Shows here!" 
-      value={searchTerm} 
-      onChange={updateTerm}
+        placeholder="Search Movies or TV Shows here!" 
+        value={searchTerm} 
+        onChange={updateTerm}
       />
     </Form>
     {loading ? (
@@ -44,7 +44,7 @@ const SearchPresenter = ({
     ) : (
       <> 
         {movieResults && movieResults.length > 0 && (
-          <Section title="Search Results : Movie ">
+          <Section title="Search Results : Movie">
             {movieResults.map(movie => (
               <Poster 
                 key={movie.id} 
@@ -55,20 +55,20 @@ const SearchPresenter = ({
                 year={movie.release_date.substring(0, 4)}  
                 isMovie={true} 
               />
-        ))}
+            ))}
       </Section>
-        )}
+    )}
         {tvResults && tvResults.length > 0 && (
-              <Section title="Search Results : TV Show ">
-                {tvResults.map(show => (
-                  <Poster 
-                    key={movie.id} 
-                    id={movie.id} 
-                    imageUrl={movie.poster_path} 
-                    title={movie.original_title}
-                    rating={movie.vote_average}
-                    year={movie.first_air_date.substring(0, 4)}  
-                  />
+          <Section title="Search Results : TV Show">
+            {tvResults.map(show => (
+              <Poster 
+                key={show.id} 
+                id={show.id} 
+                imageUrl={show.poster_path} 
+                title={show.original_title}
+                rating={show.vote_average}
+                year={show.first_air_date.substring(0, 4)}  
+              />
             ))}
           </Section>
     )}

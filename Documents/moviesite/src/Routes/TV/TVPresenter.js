@@ -19,12 +19,12 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) =>
         <Section title="Top Rated Shows">
           {topRated.map(show => (
             <Poster 
-              key={movie.id} 
-              id={movie.id} 
-              imageUrl={movie.poster_path} 
-              title={movie.original_title}
-              rating={movie.vote_average}
-              year={movie.first_air_date && movie.release_date.substring(0, 4)}
+              key={show.id} 
+              id={show.id} 
+              imageUrl={show.poster_path} 
+              title={show.original_title}
+              rating={show.vote_average}
+              year={show.first_air_date.substring(0, 4)}
               />
           ))}
         </Section>
@@ -33,12 +33,12 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) =>
         <Section title="Popular Shows">
           {popular.map(show => (
             <Poster 
-              key={movie.id} 
-              id={movie.id} 
-              imageUrl={movie.poster_path} 
-              title={movie.original_title}
-              rating={movie.vote_average}
-              year={movie.first_air_date && movie.release_date.substring(0, 4)}  
+              key={show.id} 
+              id={show.id} 
+              imageUrl={show.poster_path} 
+              title={show.original_title}
+              rating={show.vote_average}
+              year={show.first_air_date.substring(0, 4)}  
               />
           ))}
         </Section>
@@ -47,12 +47,12 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) =>
         <Section title="Airing Today">
           {airingToday.map(show => (
             <Poster 
-              key={movie.id} 
-              id={movie.id} 
-              imageUrl={movie.poster_path} 
-              title={movie.original_title}
-              rating={movie.vote_average}
-              year={movie.first_air_date && movie.release_date.substring(0, 4)}  
+              key={show.id} 
+              id={show.id} 
+              imageUrl={show.poster_path} 
+              title={show.original_title}
+              rating={show.vote_average}
+              year={show.first_air_date.substring(0, 4)}  
               />
           ))}
         </Section>
