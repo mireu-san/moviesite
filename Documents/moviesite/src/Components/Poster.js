@@ -56,7 +56,7 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
           bgUrl={
             imageUrl 
               ? `https://image.tmdb.org/t/p/w300${imageUrl}` 
-              : require("../assets/noPosterPaimon.jpg")
+              : require("../assets/noPosterPaimon.jpg").default
           } 
         />
         <Rating>
@@ -67,7 +67,7 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
         </Rating>
       </ImageContainer>
       <Title>
-        {title.length > 18 ? `${title.substring(0, 18)}...` : title}
+        
       </Title>
       <Year>{year}</Year>
     </Container>
