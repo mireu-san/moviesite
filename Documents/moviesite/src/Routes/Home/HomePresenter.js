@@ -10,28 +10,14 @@ const Container = styled.div`
   padding: 0px 20px;  
 `;
 
-const HomePresenter = ({nowPlaying, upcoming, popular, loading, error}) => 
+const HomePresenter = ({nowPlaying, popular, upcoming, loading, error}) => 
   loading ? (
-  <Loader />
+    <Loader />
   ) : (
     <Container>
       {nowPlaying && nowPlaying.length > 0 && (
         <Section title="Now Playing">
-          {nowPlaying.map(movie => 
-            <Poster 
-            key={movie.id} 
-            id={movie.id} 
-            imageUrl={movie.poster_path} 
-            title={movie.original_title}
-            rating={movie.vote_average}
-            year={movie.release_date && movie.release_date.substring(0, 4)}  
-            isMovie={true} />
-        )})
-        </Section>
-      )}
-      {upcoming && upcoming.length > 0 && (
-        <Section title="Upcoming Movie">
-          {upcoming.map(movie => 
+          {nowPlaying.map(movie => (
             <Poster 
               key={movie.id} 
               id={movie.id} 
@@ -39,22 +25,39 @@ const HomePresenter = ({nowPlaying, upcoming, popular, loading, error}) =>
               title={movie.original_title}
               rating={movie.vote_average}
               year={movie.release_date && movie.release_date.substring(0, 4)}  
-              isMovie={true} />
-        )})
+              isMovie={true} 
+            />
+        ))}
+        </Section>
+      )}
+      {upcoming && upcoming.length > 0 && (
+        <Section title="Upcoming Movie">
+          {upcoming.map(movie => (
+            <Poster 
+              key={movie.id} 
+              id={movie.id} 
+              imageUrl={movie.poster_path} 
+              title={movie.original_title}
+              rating={movie.vote_average}
+              year={movie.release_date && movie.release_date.substring(0, 4)}  
+              isMovie={true} 
+            />
+        ))}
         </Section>
       )}
       {popular && popular.length > 0 && (
         <Section title="Popular Movie">
-          {popular.map(movie => 
+          {popular.map(movie => (
             <Poster 
-            key={movie.id} 
-            id={movie.id} 
-            imageUrl={movie.poster_path} 
-            title={movie.original_title}
-            rating={movie.vote_average}
-            year={movie.release_date && movie.release_date.substring(0, 4)}  
-            isMovie={true} />
-        )})
+              key={movie.id} 
+              id={movie.id} 
+              imageUrl={movie.poster_path} 
+              title={movie.original_title}
+              rating={movie.vote_average}
+              year={movie.release_date && movie.release_date.substring(0, 4)}  
+              isMovie={true} 
+            />
+        ))}
         </Section>
       )}
       {error && <Message color="#e74c3c" text={error} />}

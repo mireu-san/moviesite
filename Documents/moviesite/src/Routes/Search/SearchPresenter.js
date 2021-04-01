@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Section from "../../Components/Section";
 import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
+import Poster from "../../Components/Poster";
 
 const Container = styled.div`
   padding: 0px 20px;  
@@ -38,23 +39,39 @@ const SearchPresenter = ({
       onChange={updateTerm}
       />
     </Form>
-    {loading ? (<Loader /> ) : (
+    {loading ? (
+      <Loader /> 
+    ) : (
       <> 
         {movieResults && movieResults.length > 0 && (
           <Section title="Search Results : Movie ">
             {movieResults.map(movie => (
-              <span key={movie.id}>{movie.title}</span>
+              <Poster 
+                key={movie.id} 
+                id={movie.id} 
+                imageUrl={movie.poster_path} 
+                title={movie.original_title}
+                rating={movie.vote_average}
+                year={movie.release_date.substring(0, 4)}  
+                isMovie={true} 
+              />
         ))}
       </Section>
         )}
         {tvResults && tvResults.length > 0 && (
               <Section title="Search Results : TV Show ">
                 {tvResults.map(show => (
-                  <span key={show.id}>{show.name}</span>
+                  <Poster 
+                    key={movie.id} 
+                    id={movie.id} 
+                    imageUrl={movie.poster_path} 
+                    title={movie.original_title}
+                    rating={movie.vote_average}
+                    year={movie.first_air_date.substring(0, 4)}  
+                  />
             ))}
           </Section>
-        )}
-    
+    )}
     {error && <Message color="#e74c3c" text={error} />}
     {tvResults && 
       movieResults &&
