@@ -52,9 +52,13 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
   <Link to={isMovie? `/movie/${id}` : `/show/${id}`}>
     <Container>
       <ImageContainer>
-        <Image bgUrl={imageUrl 
-          ? `https://image.tmdb.org/t/p/w300${imageUrl}` 
-          : require("../assets/noPoster.jpg")} />
+        <Image 
+          bgUrl={
+            imageUrl 
+              ? `https://image.tmdb.org/t/p/w300${imageUrl}` 
+              : require("../assets/noPosterPaimon.jpg")
+          } 
+        />
         <Rating>
           <span role="img" aria-label="rating">
             ★
@@ -62,7 +66,9 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
           {rating}/10
         </Rating>
       </ImageContainer>
-      <Title>{title}</Title>
+      <Title>
+        {title.length > 18 ? `${title.substring(0, 18)}...` : title}
+      </Title>
       <Year>{year}</Year>
     </Container>
   </Link>
