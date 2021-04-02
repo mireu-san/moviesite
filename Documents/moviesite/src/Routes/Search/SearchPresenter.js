@@ -34,9 +34,7 @@ const SearchPresenter = ({
 }) => (
   <Container>
     <Helmet>
-      <title>
-        Search | Miflix
-      </title>
+      <title>Search | Miflix</title>
     </Helmet>
     <Form onSubmit={handleSubmit}>
       <Input 
