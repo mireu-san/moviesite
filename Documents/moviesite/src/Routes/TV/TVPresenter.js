@@ -1,20 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import Loader from "../../Components/Loader";
 import Section from "../../Components/Section";
 import Poster from "../../Components/Poster";
 import Message from "../../Components/Message";
 
 const Container = styled.div`
-  padding: 0px 20px;
+  padding: 20px;
 `;
 
-const TVPresenter = ({ topRated, popular, airingToday, loading, error }) =>
+const TVPresenter = ({ topRated, popular, airingToday, loading, error }) => (
+  <>
+  <Helmet>
+    <title>
+      TV | Miflix
+    </title>
+  </Helmet>  
   loading ? (
+
     <Loader />
+
   ) : (
     <Container>
+      <Helmet>
+        <title>TV | Miflix</title>
+      </Helmet>
       {topRated && topRated.length > 0 && (
         <Section title="Top Rated Shows">
           {topRated.map(show => (
@@ -59,6 +71,7 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) =>
       )}
       {error && <Message color="#e74c3c" text={error} />}  
     </Container>
+    </>
   );
 
 TVPresenter.propTypes = {
