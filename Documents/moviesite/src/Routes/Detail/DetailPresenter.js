@@ -42,6 +42,7 @@ const Cover = styled.div`
   background-size: cover;
   height: 100%;
   border-radius: 5px;
+  margin-left: 35px;
 `;
 
 const Data = styled.div`
@@ -52,10 +53,12 @@ const Data = styled.div`
 const Title = styled.h3`
   font-size: 32px;
   margin-bottom: 20px;
+  margin-left: 20px;
 `;
 
 const ItemContainer = styled.span`
   margin: 20px 0;
+  margin-left: 20px;
 `;
 
 const Item = styled.span``;
@@ -69,10 +72,56 @@ const Overview = styled.p`
   opacity: 0.7;
   line-height: 1.5;  
   width: 50%;
+  margin-left: 20px;
+  margin-top: 20px;
 `;
 
 
-const DetailPresenter = ({ result, loading, error }) =>
+const TabVideoInfo = styled.div`
+  display: flex;
+  width: 50%;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const TabInfo = styled.span`
+  font-size:14px;
+  font-weight:700;
+  flex:1;
+  color:#fff;
+  text-align:center;
+  padding-bottom:8px;
+  cursor:pointer;
+  border-bottom:5px solid ${props => props.current ? "#8e44ad" : "transparent"};
+  transition:border-bottom .5s ease-in-out;
+`;
+
+
+const trailerVideo = styled.div`
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding: 30px 0px 50px 0px;
+  overflow: auto;
+  &:after{
+    content:'';
+    position:absolute;
+    width:10%;
+    height:calc(100% - 80px);
+    top: 30px;
+    right: 0;
+    background: linear-gradient(to right, transparent, #000);
+  }
+`;
+
+const Video = styled.iframe`
+  width: 30%;
+  height: 30%;
+  margin: 20px;
+`;
+
+const DetailPresenter = ({ result, loading, error, activeTab, arrTabName, clickHandler }) =>
   loading ? (
     <>
       <Helmet>
@@ -128,6 +177,39 @@ const DetailPresenter = ({ result, loading, error }) =>
         </Item>
       </ItemContainer>
       <Overview>{result.overview}</Overview>
+
+        <TabVideoInfo>
+          {
+            arrTabName.map((name, scan) => {
+              return <
+                TabInfo
+                  key={scan}
+                  onClick={() => clickHandler(scan)}
+                  current={scan === activeTab}
+                >{name}</TabInfo>  
+            })
+          }
+          {
+            result.seasons && result.seasons.length > 0 && (
+              <TabInfo onclick={() => clickHandler(3)} current={3 === activeTab}>Season</TabInfo>
+            )            
+          }
+        </TabVideoInfo> 
+        {
+          activeTab == 0 && (
+            <trailerVideo>
+              {
+                result.videos.results && result.videos.results.length > 0 ?
+                result.videos.results.map((result) => (
+                  <trailerVideoItem key={result.id}>
+                    <Video src={`https://www.youtube.com/embed/${result.key}`}/>
+                  </trailerVideoItem>
+                ) 
+              ) : "There is no available Youtube Video."
+            }
+            </trailerVideo>
+          )
+        }
     </Data>
   </Content>
 </Container>
@@ -136,7 +218,8 @@ const DetailPresenter = ({ result, loading, error }) =>
 DetailPresenter.propTypes = {
   result: PropTypes.object,
   error: PropTypes.bool.isRequired,
-  loading: PropTypes.string
+  loading: PropTypes.string,
+  arrTabName: PropTypes.array
 };
 
 export default DetailPresenter;
