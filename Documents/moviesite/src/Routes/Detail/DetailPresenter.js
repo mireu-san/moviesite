@@ -178,25 +178,7 @@ const DetailPresenter = ({ result, loading, error, activeTab, arrTabName, clickH
       </ItemContainer>
       <Overview>{result.overview}</Overview>
 
-        <TabVideoInfo>
-          {
-            arrTabName.map((name, scan) => {
-              return <
-                TabInfo
-                  key={scan}
-                  onClick={() => clickHandler(scan)}
-                  current={scan === activeTab}
-                >{name}</TabInfo>  
-            })
-          }
-          {
-            result.seasons && result.seasons.length > 0 && (
-              <TabInfo onclick={() => clickHandler(3)} current={3 === activeTab}>Season</TabInfo>
-            )            
-          }
-        </TabVideoInfo> 
-        {
-          activeTab == 0 && (
+
             <trailerVideo>
               {
                 result.videos.results && result.videos.results.length > 0 ?
@@ -209,7 +191,7 @@ const DetailPresenter = ({ result, loading, error, activeTab, arrTabName, clickH
             }
             </trailerVideo>
           )
-        }
+        
     </Data>
   </Content>
 </Container>
